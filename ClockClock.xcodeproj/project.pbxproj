@@ -66,6 +66,7 @@
 		C7B1E84726EDF78B00951F89 /* ClockClock */ = {
 			isa = PBXGroup;
 			children = (
+				C7E1AD3D26EFDC5E00F1D5A0 /* Models */,
 				C7B1E86126EE1BC500951F89 /* Components */,
 				C7B1E85D26EE19F100951F89 /* Utils */,
 				C7B1E84826EDF78B00951F89 /* AppDelegate.swift */,
@@ -83,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				C7B1E85E26EE19FB00951F89 /* Math.swift */,
-				C716CBAA26EEAAB10002970E /* ClockViewComponents.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -96,6 +96,14 @@
 				C7B1E86626EE31EC00951F89 /* ClockClockView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		C7E1AD3D26EFDC5E00F1D5A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C716CBAA26EEAAB10002970E /* ClockViewComponents.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

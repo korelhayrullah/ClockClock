@@ -8,9 +8,6 @@
 import UIKit
 
 class ClocksView: UIView {
-	// MARK: - Typealiases
-	typealias Thetas = (first: CGFloat, last: CGFloat)
-	
 	// MARK: - Properties
 	private lazy var stack: UIStackView = {
 		let stack = UIStackView()
@@ -27,7 +24,10 @@ class ClocksView: UIView {
 		return stack.intrinsicContentSize
 	}
 	
-	private let none: Thetas = (135, 135)
+	private lazy var anglesDictionary: [Int : [[Angle]]] = {
+		return createAnglesDictionary()
+	}()
+	
 	private var clocks: [[ClockView]] = []
 	private var duration: Double = 2
 	private var lastNumber: Int?
@@ -87,168 +87,204 @@ class ClocksView: UIView {
 		self.lastNumber = number
 		self.duration = duration
 		
-		switch number {
-		case 0:
-			setZero()
-		case 1:
-			setOne()
-		case 2:
-			setTwo()
-		case 3:
-			setThree()
-		case 4:
-			setFour()
-		case 5:
-			setFive()
-		case 6:
-			setSix()
-		case 7:
-			setSeven()
-		case 8:
-			setEight()
-		case 9:
-			setNine()
-		default:
-			break
-		}
-	}
-	
-	private func animate(with thetas: [[Thetas]]) {
+		guard let angles = anglesDictionary[number] else { return }
+		
 		for i in 0..<clocks.count {
 			for j in 0..<clocks[i].count {
-				clocks[i][j].animate(index: 0, duration: duration, theta: thetas[i][j].first)
-				clocks[i][j].animate(index: 1, duration: duration, theta: thetas[i][j].last)
+				let angle = angles[i][j].Angle
+				clocks[i][j].animate(index: 0, duration: duration, theta: angle.first)
+				clocks[i][j].animate(index: 1, duration: duration, theta: angle.last)
 			}
 		}
 	}
-	
-	private func setZero() {
-		let thetas: [[Thetas]] = [
-			[(0, 90), (0, 180), (0, 180), (180, 90)],
-			[(270, 90), (90, 0), (180, 90), (270, 90)],
-			[(270, 90), (270, 90), (270, 90), (270, 90)],
-			[(270, 90), (270, 90), (270, 90), (270, 90)],
-			[(270, 90), (270, 0), (180, 270), (270, 90)],
-			[(270, 0), (180, 0), (180, 0), (180, 270)],
-		]
-		animate(with: thetas)
-	}
-	
-	private func setOne() {
-		let thetas: [[Thetas]] = [
-			[(90, 0), (180, 0), (180, 90), none],
-			[(270, 0), (180, 90), (270, 90), none],
-			[none, (270, 90), (270, 90), none],
-			[none, (270, 90), (270, 90), none],
-			[(0, 90), (180, 270), (270, 0), (180, 90)],
-			[(270, 0), (180, 0), (180, 0), (180, 270)],
+}
+
+// MARK: - Create Angles
+extension ClocksView {
+	private func createAnglesDictionary() -> [Int : [[Angle]]] {
+		var anglesDictionary: [Int : [[Angle]]] = [:]
+		
+		// 0
+		let zero: [[Angle]] = [
+			[.right2Bottom, .right2Left, .right2Left, .left2Bottom],
+			[.top2Bottom, .bottom2Right, .left2Bottom, .top2Bottom],
+			[.top2Bottom, .top2Bottom, .top2Bottom, .top2Bottom],
+			[.top2Bottom, .top2Bottom, .top2Bottom, .top2Bottom],
+			[.top2Bottom, .top2Right, .left2Top, .top2Bottom],
+			[.top2Right, .left2Right, .left2Right, .left2Top],
 		]
 		
-		animate(with: thetas)
-	}
-	
-	private func setTwo() {
-		let thetas: [[Thetas]] = [
-			[(90, 0), (180, 0), (180, 0), (180, 90)],
-			[(270, 0), (180, 0), (180, 90), (270, 90)],
-			[(90, 0), (180, 0), (180, 270), (270, 90)],
-			[(90, 270), (90, 0), (180, 0), (180, 270)],
-			[(90, 270), (270, 0), (180, 0), (180, 90)],
-			[(270, 0), (180, 0), (180, 0), (180, 270)],
+		anglesDictionary[0] = zero
+		
+		// 1
+		let one: [[Angle]] = [
+			[.bottom2Right, .left2Right, .left2Bottom, .none],
+			[.top2Right, .left2Bottom, .top2Bottom, .none],
+			[.none, .top2Bottom, .top2Bottom, .none],
+			[.none, .top2Bottom, .top2Bottom, .none],
+			[.right2Bottom, .left2Top, .top2Right, .left2Bottom],
+			[.top2Right, .left2Right, .left2Right, .left2Top],
 		]
 		
-		animate(with: thetas)
-	}
-	
-	private func setThree() {
-		let thetas: [[Thetas]] = [
-			[(90, 0), (180, 0), (180, 0), (180, 90)],
-			[(270, 0), (180, 0), (180, 90), (270, 90)],
-			[(90, 0), (180, 0), (180, 270), (270, 90)],
-			[(270, 0), (180, 0), (180, 90), (270, 90)],
-			[(90, 0), (180, 0), (180, 270), (270, 90)],
-			[(270, 0), (180, 0), (180, 0), (180, 270)],
+		anglesDictionary[1] = one
+		
+		
+		// 2
+		let two: [[Angle]] = [
+			[.bottom2Right, .left2Right, .left2Right, .left2Bottom],
+			[.top2Right, .left2Right, .left2Bottom, .top2Bottom],
+			[.bottom2Right, .left2Right, .left2Top, .top2Bottom],
+			[.bottom2Top, .bottom2Right, .left2Right, .left2Top],
+			[.bottom2Top, .top2Right, .left2Right, .left2Bottom],
+			[.top2Right, .left2Right, .left2Right, .left2Top],
 		]
 		
-		animate(with: thetas)
-	}
-	
-	private func setFour() {
-		let thetas: [[Thetas]] = [
-			[(90, 0), (180, 90), (90, 0), (180, 90)],
-			[(270, 90), (270, 90), (270, 90), (270, 90)],
-			[(270, 90), (270, 0), (180, 270), (270, 90)],
-			[(270, 0), (180, 0), (180, 90), (270, 90)],
-			[none, none, (270, 90), (270, 90)],
-			[none, none, (270, 0), (180, 270)],
+		anglesDictionary[2] = two
+		
+		// 3
+		let three: [[Angle]] = [
+			[.bottom2Right, .left2Right, .left2Right, .left2Bottom],
+			[.top2Right, .left2Right, .left2Bottom, .top2Bottom],
+			[.bottom2Right, .left2Right, .left2Top, .top2Bottom],
+			[.top2Right, .left2Right, .left2Bottom, .top2Bottom],
+			[.bottom2Right, .left2Right, .left2Top, .top2Bottom],
+			[.top2Right, .left2Right, .left2Right, .left2Top],
 		]
 		
-		animate(with: thetas)
-	}
-	
-	private func setFive() {
-		let thetas: [[Thetas]] = [
-			[(90, 0), (180, 0), (180, 0), (180, 90)],
-			[(270, 90), (90, 0), (180, 0), (180, 270)],
-			[(270, 90), (270, 0), (180, 0), (180, 90)],
-			[(270, 0), (180, 0), ((180, 90)), (270, 90)],
-			[(90, 0), (180, 0), (180, 270), (270, 90)],
-			[(270, 0), (180, 0), (180, 0), (180, 270)],
+		anglesDictionary[3] = three
+		
+		// 4
+		let four: [[Angle]] = [
+			[.bottom2Right, .left2Bottom, .bottom2Right, .left2Bottom],
+			[.top2Bottom, .top2Bottom, .top2Bottom, .top2Bottom],
+			[.top2Bottom, .top2Right, .left2Top, .top2Bottom],
+			[.top2Right, .left2Right, .left2Bottom, .top2Bottom],
+			[.none, .none, .top2Bottom, .top2Bottom],
+			[.none, .none, .top2Right, .left2Top],
 		]
 		
-		animate(with: thetas)
-	}
-	
-	private func setSix() {
-		let thetas: [[Thetas]] = [
-			[(90, 0), (180, 0), (180, 0), (180, 90)],
-			[(270, 90), (90, 0), (180, 0), (180, 270)],
-			[(270, 90), (270, 0), (180, 0), (180, 90)],
-			[(270, 90), (90, 0), (180, 90), (270, 90)],
-			[(270, 90), (270, 0), (180, 270), (270, 90)],
-			[(270, 0), (180, 0), (180, 0), (180, 270)],
+		anglesDictionary[4] = four
+		
+		// 5
+		let five: [[Angle]] = [
+			[.bottom2Right, .left2Right, .left2Right, .left2Bottom],
+			[.top2Bottom, .bottom2Right, .left2Right, .left2Top],
+			[.top2Bottom, .top2Right, .left2Right, .left2Bottom],
+			[.top2Right, .left2Right, (.left2Bottom), .top2Bottom],
+			[.bottom2Right, .left2Right, .left2Top, .top2Bottom],
+			[.top2Right, .left2Right, .left2Right, .left2Top],
 		]
 		
-		animate(with: thetas)
-	}
-	
-	private func setSeven() {
-		let thetas: [[Thetas]] = [
-			[(90, 0), (180, 0), (180, 0), (180, 90)],
-			[(270, 0), (180, 0), (180, 90), (90, 270)],
-			[none, none, (270, 90), (90, 270)],
-			[none, none, (270, 90), (270, 90)],
-			[none, none, (270, 90), (270, 90)],
-			[none, none, (270, 0), (180, 270)],
+		anglesDictionary[5] = five
+		
+		// 6
+		let six: [[Angle]] = [
+			[.bottom2Right, .left2Right, .left2Right, .left2Bottom],
+			[.top2Bottom, .bottom2Right, .left2Right, .left2Top],
+			[.top2Bottom, .top2Right, .left2Right, .left2Bottom],
+			[.top2Bottom, .bottom2Right, .left2Bottom, .top2Bottom],
+			[.top2Bottom, .top2Right, .left2Top, .top2Bottom],
+			[.top2Right, .left2Right, .left2Right, .left2Top],
 		]
 		
-		animate(with: thetas)
-	}
-	
-	private func setEight() {
-		let thetas: [[Thetas]] = [
-			[(90, 0), (180, 0), (180, 0), (180, 90)],
-			[(270, 90), (90, 0), (180, 90), (270, 90)],
-			[(270, 90), (270, 0), (180, 270), (270, 90)],
-			[(270, 90), (90, 0), (180, 90), (270, 90)],
-			[(270, 90), (270, 0), (180, 270), (270, 90)],
-			[(270, 0), (180, 0), (180, 0), (180, 270)],
+		anglesDictionary[6] = six
+		
+		// 7
+		let seven: [[Angle]] = [
+			[.bottom2Right, .left2Right, .left2Right, .left2Bottom],
+			[.top2Right, .left2Right, .left2Bottom, .bottom2Top],
+			[.none, .none, .top2Bottom, .bottom2Top],
+			[.none, .none, .top2Bottom, .top2Bottom],
+			[.none, .none, .top2Bottom, .top2Bottom],
+			[.none, .none, .top2Right, .left2Top],
 		]
 		
-		animate(with: thetas)
-	}
-	
-	private func setNine() {
-		let thetas: [[Thetas]] = [
-			[(90, 0), (180, 0), (180, 0), (180, 90)],
-			[(270, 90), (90, 0), (180, 90), (90, 270)],
-			[(270, 90), (270, 0), (180, 270), (90, 270)],
-			[(270, 0), (180, 0), (180, 90), (90, 270)],
-			[(90, 0), (180, 0), (180, 270), (90, 270)],
-			[(270, 0), (180, 0), (180, 0), (180, 270)],
+		anglesDictionary[7] = seven
+		
+		// 8
+		let eight: [[Angle]] = [
+			[.bottom2Right, .left2Right, .left2Right, .left2Bottom],
+			[.top2Bottom, .bottom2Right, .left2Bottom, .top2Bottom],
+			[.top2Bottom, .top2Right, .left2Top, .top2Bottom],
+			[.top2Bottom, .bottom2Right, .left2Bottom, .top2Bottom],
+			[.top2Bottom, .top2Right, .left2Top, .top2Bottom],
+			[.top2Right, .left2Right, .left2Right, .left2Top],
 		]
 		
-		animate(with: thetas)
+		anglesDictionary[8] = eight
+		
+		// nine
+		let nine: [[Angle]] = [
+			[.bottom2Right, .left2Right, .left2Right, .left2Bottom],
+			[.top2Bottom, .bottom2Right, .left2Bottom, .bottom2Top],
+			[.top2Bottom, .top2Right, .left2Top, .bottom2Top],
+			[.top2Right, .left2Right, .left2Bottom, .bottom2Top],
+			[.bottom2Right, .left2Right, .left2Top, .bottom2Top],
+			[.top2Right, .left2Right, .left2Right, .left2Top],
+		]
+		
+		anglesDictionary[9] = nine
+		
+		return anglesDictionary
+	}
+}
+
+// MARK: - Angle
+extension ClocksView {
+	enum Angle {
+		case none
+		
+		// horizontal
+		case left2Right
+		case right2Left
+		
+		// vertical
+		case top2Bottom
+		case bottom2Top
+		
+		// others
+		case left2Top
+		case top2Left
+		
+		case top2Right
+		case right2Top
+		
+		case right2Bottom
+		case bottom2Right
+		case bottom2Left
+		case left2Bottom
+		
+		
+		var Angle: (first: CGFloat, last: CGFloat) {
+			switch self {
+			case .none:
+				return (135, 135)
+			case .left2Right:
+				return (180, 0)
+			case .right2Left:
+				return (0, 180)
+			case .top2Bottom:
+				return (270, 90)
+			case .bottom2Top:
+				return (90, 270)
+			case .left2Top:
+				return (180, 270)
+			case .top2Left:
+				return (270, 180)
+			case .top2Right:
+				return (270, 0)
+			case .right2Top:
+				return (0, 270)
+			case .right2Bottom:
+				return (0, 90)
+			case .bottom2Right:
+				return (90, 0)
+			case .bottom2Left:
+				return (90, 180)
+			case .left2Bottom:
+				return (180, 90)
+			}
+		}
 	}
 }
 
