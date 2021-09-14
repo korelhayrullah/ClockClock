@@ -74,8 +74,8 @@ class SettingsViewController: UITableViewController {
 	
 	private func update() {
 		animationDurationLabel.text = "\(mutableSettings.animationDuration)s"
-		lineWidthLabel.text = "\(mutableSettings.lineWidth)"
-		outlineWidthLabel.text = "\(mutableSettings.outlineWidth)"
+		lineWidthLabel.text = "\(Int(mutableSettings.lineWidth))"
+		outlineWidthLabel.text = "\(Int(mutableSettings.outlineWidth))"
 		darkModeLineColorView.backgroundColor = mutableSettings.darkModeLineColor
 		darkModeOutlineColorView.backgroundColor = mutableSettings.darkModeOutlineColor
 		lightModeLineColorView.backgroundColor = mutableSettings.lightModeLineColor
@@ -94,21 +94,35 @@ class SettingsViewController: UITableViewController {
 				self?.update()
 			}
 		case (0, 1):
-			presentNumberSelectionPickerAlert(title: "Select Line Width", numbers: [1, 2, 3, 4, 5, 6]) { [weak self] lineWidth in
+			let completion: (CGFloat) -> Void = { [weak self] lineWidth in
 				guard let self = self else { return }
 				
 				Settings.needsRedraw = self.mutableSettings.lineWidth != lineWidth
 				self.mutableSettings.lineWidth = lineWidth
 				self.update()
 			}
+			
+			presentNumberSelectionPickerAlert(
+				title: "Select Line Width",
+				selected: Int(mutableSettings.lineWidth),
+				numbers: [1, 2, 3, 4, 5, 6],
+				completion: completion
+			)
 		case (0, 2):
-			presentNumberSelectionPickerAlert(title: "Select Outline Width", numbers: [1, 2, 3]) { [weak self] lineWidth in
+			let completion: (CGFloat) -> Void = { [weak self] lineWidth in
 				guard let self = self else { return }
 				
 				Settings.needsRedraw = self.mutableSettings.outlineWidth != lineWidth
 				self.mutableSettings.outlineWidth = lineWidth
 				self.update()
 			}
+			
+			presentNumberSelectionPickerAlert(
+				title: "Select Outline Width",
+				selected: Int(mutableSettings.outlineWidth),
+				numbers: [1, 2, 3],
+				completion: completion
+			)
 		case (1, 0):
 			presentColorSelectionController(selected: mutableSettings.darkModeLineColor, completion: { [weak self] color in
 				guard let self = self else { return }
@@ -181,10 +195,7 @@ class SettingsViewController: UITableViewController {
 
 // MARK: - Alerts and Presentations
 extension SettingsViewController {
-	private func presentNumberSelectionPickerAlert(
-		title: String?,
-		numbers: [Int],
-		completion: @escaping (CGFloat) -> Void) {
+	private func presentNumberSelectionPickerAlert(title: String?, selected: Int? = nil, numbers: [Int], completion: @escaping (CGFloat) -> Void) {
 		let alert = UIAlertController(
 			title: title,
 			message: "\n\n\n\n\n\n",
@@ -195,6 +206,10 @@ extension SettingsViewController {
 		
 		let picker = NumberPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
 		picker.set(numbers)
+		if let selected = selected {
+			picker.select(selected)
+		}
+		
 		alert.view.addSubview(picker)
 		
 		let select = UIAlertAction(title: "Select", style: .default, handler: { _ in
