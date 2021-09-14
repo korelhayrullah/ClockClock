@@ -15,12 +15,15 @@ class ViewController: UIViewController {
 	@IBOutlet
 	private weak var infoLabel: UILabel!
 	
-	private var isInitial: Bool = true
-	private var timer: Timer?
-	
 	override var prefersStatusBarHidden: Bool {
 		return true
 	}
+	
+	override var prefersHomeIndicatorAutoHidden: Bool {
+		return true
+	}
+	
+	private var isInitial: Bool = true
 	
 	// MARK: - Methods
 	override func viewDidLoad() {
@@ -30,11 +33,11 @@ class ViewController: UIViewController {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		startTimer()
-		
 		UIApplication.shared.isIdleTimerDisabled = true
 		
-		if isInitial || Double.random(in: 0...1) < 0.3 {
+		clockClockView.start()
+		
+		if isInitial || Int.random(in: 0...100) <= 25 {
 			animateInfoLabel()
 			isInitial = false
 		}
@@ -42,9 +45,9 @@ class ViewController: UIViewController {
 	
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
-		stopTimer()
-		
 		UIApplication.shared.isIdleTimerDisabled = false
+		
+		clockClockView.stop()
 	}
 	
 	private func setGestureRecognizer() {
@@ -87,28 +90,5 @@ class ViewController: UIViewController {
 			}
 		}
 		present(nav, animated: true, completion: nil)
-	}
-	
-	// MARK: - Timer
-	private func startTimer() {
-		clockClockView.update(duration: Settings.animationDuration)
-		
-		timer = Timer.scheduledTimer(
-			timeInterval: 1,
-			target: self,
-			selector: #selector(timerDidFire(_:)),
-			userInfo: nil,
-			repeats: true
-		)
-	}
-	
-	private func stopTimer() {
-		timer?.invalidate()
-		timer = nil
-	}
-	
-	@objc
-	private func timerDidFire(_ timer: Timer) {
-		clockClockView.update(duration: Settings.animationDuration)
 	}
 }

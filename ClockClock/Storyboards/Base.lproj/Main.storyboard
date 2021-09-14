@@ -24,7 +24,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double tap for settings" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIg-t1-i0b">
-                                <rect key="frame" x="120" y="746" width="174" height="20.5"/>
+                                <rect key="frame" x="120" y="724" width="174" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -33,7 +33,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bIg-t1-i0b" firstAttribute="top" secondItem="qM1-bl-AEn" secondAttribute="bottom" constant="42" id="L2t-HO-9FU"/>
+                            <constraint firstItem="bIg-t1-i0b" firstAttribute="top" secondItem="qM1-bl-AEn" secondAttribute="bottom" constant="20" id="L2t-HO-9FU"/>
                             <constraint firstItem="bIg-t1-i0b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lql-Ae-DD1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bIg-t1-i0b" secondAttribute="trailing" constant="32" id="U2t-by-gJA"/>
                             <constraint firstItem="qM1-bl-AEn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="WKg-ev-Lac"/>
@@ -175,26 +175,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oWQ-0M-MZn">
-                                                    <rect key="frame" x="20" y="10" width="374" height="30"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNS-Y2-h6e">
-                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
-                                                            <color key="tintColor" systemColor="systemRedColor"/>
-                                                            <state key="normal" title="Reset"/>
-                                                            <connections>
-                                                                <action selector="resetButtonPressed:" destination="tDS-a0-W87" eventType="touchUpInside" id="rhe-fA-4lf"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNS-Y2-h6e">
+                                                    <rect key="frame" x="20" y="10" width="39" height="30"/>
+                                                    <color key="tintColor" systemColor="systemRedColor"/>
+                                                    <state key="normal" title="Reset"/>
+                                                    <connections>
+                                                        <action selector="resetButtonPressed:" destination="tDS-a0-W87" eventType="touchUpInside" id="rhe-fA-4lf"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="oWQ-0M-MZn" secondAttribute="trailing" constant="20" id="F8Y-n8-X8d"/>
-                                                <constraint firstItem="oWQ-0M-MZn" firstAttribute="centerY" secondItem="7SF-e1-C1g" secondAttribute="centerY" id="Fpn-1s-GW2"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oWQ-0M-MZn" secondAttribute="bottom" id="MA9-Av-oMz"/>
-                                                <constraint firstItem="oWQ-0M-MZn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7SF-e1-C1g" secondAttribute="top" id="Sot-hC-y4e"/>
-                                                <constraint firstItem="oWQ-0M-MZn" firstAttribute="leading" secondItem="7SF-e1-C1g" secondAttribute="leading" constant="20" id="WMj-tf-3LA"/>
+                                                <constraint firstItem="ZNS-Y2-h6e" firstAttribute="leading" secondItem="7SF-e1-C1g" secondAttribute="leading" constant="20" id="X7h-wi-CmW"/>
+                                                <constraint firstItem="ZNS-Y2-h6e" firstAttribute="centerY" secondItem="7SF-e1-C1g" secondAttribute="centerY" id="wp9-lE-ZWq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -206,11 +198,23 @@
                             <outlet property="delegate" destination="tDS-a0-W87" id="xaP-DA-SQl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="u2y-fF-jjv"/>
+                    <navigationItem key="navigationItem" title="Settings" id="u2y-fF-jjv">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="ZtR-t9-bcL">
+                            <connections>
+                                <action selector="closeBarButtonItemPressed:" destination="tDS-a0-W87" id="IAv-9J-WJF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="gJa-AQ-2E9">
+                            <connections>
+                                <action selector="saveBarButtonItemPressed:" destination="tDS-a0-W87" id="GOg-m4-Pgd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="animationDurationLabel" destination="6px-eh-WD6" id="m9E-QW-nbg"/>
                         <outlet property="darkModeLineColorView" destination="HJa-4M-qhC" id="ely-nV-Uzs"/>
                         <outlet property="lightModeLineColorView" destination="7gR-kT-pvm" id="kg6-Qg-uGZ"/>
+                        <outlet property="saveBarButtonItem" destination="gJa-AQ-2E9" id="6IY-Kr-zOI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lch-bb-QaG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -294,9 +298,11 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUO-EE-iqF">
                                         <rect key="frame" x="0.0" y="409" width="382" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="9oV-JZ-rlc"/>
                                         </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Select"/>
                                         <connections>
                                             <action selector="selectButtonPressed:" destination="FJN-gV-xmn" eventType="touchUpInside" id="cDw-14-HyB"/>
@@ -340,7 +346,7 @@
         <!--Navigation Controller-->
         <scene sceneID="C5f-t8-rrI">
             <objects>
-                <navigationController storyboardIdentifier="SettingsTableViewControllerNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MYU-8P-q9a" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SettingsTableViewControllerNavigationController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MYU-8P-q9a" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xkw-sh-LpQ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -377,6 +383,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

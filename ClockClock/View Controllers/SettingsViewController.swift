@@ -18,22 +18,41 @@ class SettingsViewController: UITableViewController {
 	@IBOutlet
 	private weak var lightModeLineColorView: UIView!
 	
+	@IBOutlet
+	private var saveBarButtonItem: UIBarButtonItem!
+	
+	private var mutableSettings: SettingsModelMutable = SettingsModelMutable(model: Settings.current)
+	
 	var dismissed: (() -> Void)?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		configureUI()
 		update()
 	}
 	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		dismissed?()
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		darkModeLineColorView.layer.cornerRadius = darkModeLineColorView.frame.height / 2
+		lightModeLineColorView.layer.cornerRadius = lightModeLineColorView.frame.height / 2
+	}
+	
+	private func configureUI() {
+		darkModeLineColorView.layer.borderWidth = 0.5
+		darkModeLineColorView.layer.borderColor = UIColor.black.cgColor
+		
+		lightModeLineColorView.layer.borderWidth = 0.5
+		lightModeLineColorView.layer.borderColor = UIColor.black.cgColor
 	}
 	
 	private func update() {
-		animationDurationLabel.text = "\(Settings.animationDuration)"
-		darkModeLineColorView.backgroundColor = Settings.darkModeLineColor
-		lightModeLineColorView.backgroundColor = Settings.lightModeLineColor
+		animationDurationLabel.text = "\(mutableSettings.animationDuration)s"
+		darkModeLineColorView.backgroundColor = mutableSettings.darkModeLineColor
+		lightModeLineColorView.backgroundColor = mutableSettings.lightModeLineColor
+		
+		
+		let hasChanges = Settings.current != SettingsModel(model: mutableSettings)
+		navigationItem.rightBarButtonItems = hasChanges ? [saveBarButtonItem] : []
 	}
 	
 	// MARK: - Methods
@@ -41,20 +60,22 @@ class SettingsViewController: UITableViewController {
 		switch indexPath.row {
 		case 0:
 			presentAnimationDurationAlert { [weak self] duration in
-				Settings.animationDuration = duration
+				self?.mutableSettings.animationDuration = duration
 				self?.update()
 			}
 		case 1:
-			presentColorSelectionController(selected: Settings.darkModeLineColor, completion: { [weak self] color in
-				Settings.needsRedraw = Settings.darkModeLineColor != color
-				Settings.darkModeLineColor = color
-				self?.update()
+			presentColorSelectionController(selected: mutableSettings.darkModeLineColor, completion: { [weak self] color in
+				guard let self = self else { return }
+				Settings.needsRedraw = self.mutableSettings.darkModeLineColor != color
+				self.mutableSettings.darkModeLineColor = color
+				self.update()
 			})
 		case 2:
-			presentColorSelectionController(selected: Settings.lightModeLineColor, completion: { [weak self] color in
-				Settings.needsRedraw = Settings.lightModeLineColor != color
-				Settings.lightModeLineColor = color
-				self?.update()
+			presentColorSelectionController(selected: mutableSettings.lightModeLineColor, completion: { [weak self] color in
+				guard let self = self else { return }
+				Settings.needsRedraw = self.mutableSettings.lightModeLineColor != color
+				self.mutableSettings.lightModeLineColor = color
+				self.update()
 			})
 		default:
 			break
@@ -73,8 +94,33 @@ class SettingsViewController: UITableViewController {
 	// MARK: - Actions
 	@IBAction
 	private func resetButtonPressed(_ sender: UIButton) {
-		Settings.reset()
-		update()
+		let alert = UIAlertController(title: "Reset", message: "Are you sure you want to reset your settings?", preferredStyle: .actionSheet)
+		
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		
+		let reset = UIAlertAction(title: "Reset", style: .destructive) { [weak self] _ in
+			self?.mutableSettings = SettingsModelMutable(model: .preset)
+			self?.update()
+		}
+		
+		alert.addAction(reset)
+		alert.addAction(cancel)
+		present(alert, animated: true, completion: nil)
+	}
+	
+	@IBAction
+	private func closeBarButtonItemPressed(_ sender: UIBarButtonItem) {
+		dismiss(animated: true, completion: { [weak self] in
+			self?.dismissed?()
+		})
+	}
+	
+	@IBAction
+	private func saveBarButtonItemPressed(_ sender: UIBarButtonItem) {
+		Settings.current = SettingsModel(model: mutableSettings)
+		dismiss(animated: true, completion: { [weak self] in
+			self?.dismissed?()
+		})
 	}
 }
 

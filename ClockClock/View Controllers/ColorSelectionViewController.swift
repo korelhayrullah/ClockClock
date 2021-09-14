@@ -29,10 +29,16 @@ class ColorSelectionViewController: UIViewController {
 	// MARK: - Methods
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		configureUI()
 		update(with: selectedColor, updatesSliderComponets: true)
 	}
 	
 	// MARK: - Methods
+	private func configureUI() {
+		previewView.layer.borderWidth = 0.5
+		previewView.layer.borderColor = UIColor.black.cgColor
+	}
+	
 	private func update(with color: UIColor?, updatesSliderComponets: Bool) {
 		previewView.backgroundColor = color
 		
@@ -43,8 +49,13 @@ class ColorSelectionViewController: UIViewController {
 
 		if updatesSliderComponets {
 			redSlider.setValue(Float(r), animated: false)
+			redSlider.minimumTrackTintColor = UIColor(red: r, green: 0, blue: 0)
+			
 			greenSlider.setValue(Float(b), animated: false)
+			greenSlider.minimumTrackTintColor = UIColor(red: 0, green: g, blue: 0)
+			
 			blueSlider.setValue(Float(b), animated: false)
+			blueSlider.minimumTrackTintColor = UIColor(red: 0, green: 0, blue: b)
 		}
 	}
 	

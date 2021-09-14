@@ -34,13 +34,13 @@ class ClockView: UIView {
 		if #available(iOS 13, *) {
 			return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
 				if UITraitCollection.userInterfaceStyle == .dark {
-					return Settings.darkModeLineColor
+					return Settings.current.darkModeLineColor
 				}
 				
-				return Settings.lightModeLineColor
+				return Settings.current.lightModeLineColor
 			}
 		} else {
-			return Settings.lightModeLineColor
+			return Settings.current.lightModeLineColor
 		}
 	}
 	

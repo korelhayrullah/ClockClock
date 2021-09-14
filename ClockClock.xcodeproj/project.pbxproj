@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C716CBAB26EEAAB10002970E /* ClockViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716CBAA26EEAAB10002970E /* ClockViewComponents.swift */; };
+		C7A3BF8E26F0EEAC009510B4 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A3BF8D26F0EEAC009510B4 /* SettingsModel.swift */; };
 		C7B1E84926EDF78B00951F89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B1E84826EDF78B00951F89 /* AppDelegate.swift */; };
 		C7B1E84B26EDF78B00951F89 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B1E84A26EDF78B00951F89 /* SceneDelegate.swift */; };
 		C7B1E84D26EDF78B00951F89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B1E84C26EDF78B00951F89 /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		C716CBAA26EEAAB10002970E /* ClockViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewComponents.swift; sourceTree = "<group>"; };
+		C7A3BF8D26F0EEAC009510B4 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		C7B1E84526EDF78B00951F89 /* ClockClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClockClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7B1E84826EDF78B00951F89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7B1E84A26EDF78B00951F89 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				C716CBAA26EEAAB10002970E /* ClockViewComponents.swift */,
 				C7B203DA26F00A910081012D /* Settings.swift */,
+				C7A3BF8D26F0EEAC009510B4 /* SettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A3BF8E26F0EEAC009510B4 /* SettingsModel.swift in Sources */,
 				C7B1E86726EE31EC00951F89 /* ClockClockView.swift in Sources */,
 				C716CBAB26EEAAB10002970E /* ClockViewComponents.swift in Sources */,
 				C7B203DD26F00D320081012D /* SettingsViewController.swift in Sources */,

@@ -24,6 +24,7 @@ class ClockClockView: UIView {
 		return stack.intrinsicContentSize
 	}
 	
+	private var timer: Timer?
 	private var clocks: [[ClocksView]] = []
 	
 	// MARK: - Init
@@ -67,6 +68,29 @@ class ClockClockView: UIView {
 			stack.addArrangedSubview(rowStack)
 			clocks.append(row)
 		}
+	}
+	
+	// MARK: - Timer
+	func start() {
+		update(duration: Settings.current.animationDuration)
+		
+		timer = Timer.scheduledTimer(
+			timeInterval: 1,
+			target: self,
+			selector: #selector(timerDidFire(_:)),
+			userInfo: nil,
+			repeats: true
+		)
+	}
+	
+	func stop() {
+		timer?.invalidate()
+		timer = nil
+	}
+	
+	@objc
+	private func timerDidFire(_ timer: Timer) {
+		update(duration: Settings.current.animationDuration)
 	}
 	
 	// MARK: - Methods
