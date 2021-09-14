@@ -33,14 +33,30 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qM1-bl-AEn" secondAttribute="trailing" constant="128" id="5R7-vJ-G94"/>
                             <constraint firstItem="bIg-t1-i0b" firstAttribute="top" secondItem="qM1-bl-AEn" secondAttribute="bottom" constant="20" id="L2t-HO-9FU"/>
                             <constraint firstItem="bIg-t1-i0b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lql-Ae-DD1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bIg-t1-i0b" secondAttribute="trailing" constant="32" id="U2t-by-gJA"/>
                             <constraint firstItem="qM1-bl-AEn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="WKg-ev-Lac"/>
                             <constraint firstItem="qM1-bl-AEn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ijA-pW-Vl9"/>
+                            <constraint firstItem="qM1-bl-AEn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="128" id="m2f-y9-I8p"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qM1-bl-AEn" secondAttribute="trailing" constant="16" id="qHz-c0-3Mj"/>
                             <constraint firstItem="bIg-t1-i0b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="ueV-n1-oJB"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5R7-vJ-G94"/>
+                                <exclude reference="m2f-y9-I8p"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="5R7-vJ-G94"/>
+                                <exclude reference="qHz-c0-3Mj"/>
+                                <exclude reference="WKg-ev-Lac"/>
+                                <include reference="m2f-y9-I8p"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="clockClockView" destination="qM1-bl-AEn" id="Eva-6g-aie"/>
