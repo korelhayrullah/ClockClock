@@ -68,8 +68,7 @@ class ClocksView: UIView {
 				clockView.translatesAutoresizingMaskIntoConstraints = false
 				
 				NSLayoutConstraint.activate([
-					clockView.widthAnchor.constraint(equalToConstant: 30),
-					clockView.heightAnchor.constraint(equalToConstant: 30)
+					clockView.heightAnchor.constraint(equalTo: clockView.widthAnchor)
 				])
 				
 				row.append(clockView)
@@ -82,7 +81,15 @@ class ClocksView: UIView {
 	}
 	
 	// MARK: - Methods
-	func animate(to number: Int, duration: Double = 2) {
+	func redraw() {
+		for r in clocks {
+			for i in r {
+				i.redraw()
+			}
+		}
+	}
+	
+	func animate(to number: Int, duration: Double) {
 		guard number != lastNumber else { return }
 		self.lastNumber = number
 		self.duration = duration
@@ -228,63 +235,3 @@ extension ClocksView {
 		return anglesDictionary
 	}
 }
-
-// MARK: - Angle
-extension ClocksView {
-	enum Angle {
-		case none
-		
-		// horizontal
-		case left2Right
-		case right2Left
-		
-		// vertical
-		case top2Bottom
-		case bottom2Top
-		
-		// others
-		case left2Top
-		case top2Left
-		
-		case top2Right
-		case right2Top
-		
-		case right2Bottom
-		case bottom2Right
-		case bottom2Left
-		case left2Bottom
-		
-		
-		var Angle: (first: CGFloat, last: CGFloat) {
-			switch self {
-			case .none:
-				return (135, 135)
-			case .left2Right:
-				return (180, 0)
-			case .right2Left:
-				return (0, 180)
-			case .top2Bottom:
-				return (270, 90)
-			case .bottom2Top:
-				return (90, 270)
-			case .left2Top:
-				return (180, 270)
-			case .top2Left:
-				return (270, 180)
-			case .top2Right:
-				return (270, 0)
-			case .right2Top:
-				return (0, 270)
-			case .right2Bottom:
-				return (0, 90)
-			case .bottom2Right:
-				return (90, 0)
-			case .bottom2Left:
-				return (90, 180)
-			case .left2Bottom:
-				return (180, 90)
-			}
-		}
-	}
-}
-

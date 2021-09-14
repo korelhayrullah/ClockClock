@@ -18,6 +18,13 @@
 		C7B1E86326EE1BCE00951F89 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B1E86226EE1BCE00951F89 /* ClockView.swift */; };
 		C7B1E86526EE29B500951F89 /* ClocksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B1E86426EE29B500951F89 /* ClocksView.swift */; };
 		C7B1E86726EE31EC00951F89 /* ClockClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B1E86626EE31EC00951F89 /* ClockClockView.swift */; };
+		C7B203D926F009EC0081012D /* ClocksView+Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B203D826F009EC0081012D /* ClocksView+Angle.swift */; };
+		C7B203DB26F00A910081012D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B203DA26F00A910081012D /* Settings.swift */; };
+		C7B203DD26F00D320081012D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B203DC26F00D320081012D /* SettingsViewController.swift */; };
+		C7B203DF26F014200081012D /* ColorSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B203DE26F014200081012D /* ColorSelectionViewController.swift */; };
+		C7B203E726F016370081012D /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B203E626F016370081012D /* UIStoryboard+Ext.swift */; };
+		C7B203E926F016660081012D /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B203E826F016660081012D /* UINavigationController+Ext.swift */; };
+		C7B203EB26F0187D0081012D /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B203EA26F0187D0081012D /* UIColor+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +41,13 @@
 		C7B1E86226EE1BCE00951F89 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		C7B1E86426EE29B500951F89 /* ClocksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClocksView.swift; sourceTree = "<group>"; };
 		C7B1E86626EE31EC00951F89 /* ClockClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockClockView.swift; sourceTree = "<group>"; };
+		C7B203D826F009EC0081012D /* ClocksView+Angle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClocksView+Angle.swift"; sourceTree = "<group>"; };
+		C7B203DA26F00A910081012D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		C7B203DC26F00D320081012D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		C7B203DE26F014200081012D /* ColorSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionViewController.swift; sourceTree = "<group>"; };
+		C7B203E626F016370081012D /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
+		C7B203E826F016660081012D /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
+		C7B203EA26F0187D0081012D /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,15 +80,15 @@
 		C7B1E84726EDF78B00951F89 /* ClockClock */ = {
 			isa = PBXGroup;
 			children = (
-				C7E1AD3D26EFDC5E00F1D5A0 /* Models */,
-				C7B1E86126EE1BC500951F89 /* Components */,
-				C7B1E85D26EE19F100951F89 /* Utils */,
 				C7B1E84826EDF78B00951F89 /* AppDelegate.swift */,
 				C7B1E84A26EDF78B00951F89 /* SceneDelegate.swift */,
-				C7B1E84C26EDF78B00951F89 /* ViewController.swift */,
-				C7B1E84E26EDF78B00951F89 /* Main.storyboard */,
-				C7B1E85126EDF78C00951F89 /* Assets.xcassets */,
-				C7B1E85326EDF78C00951F89 /* LaunchScreen.storyboard */,
+				C7B203E026F0144A0081012D /* View Controllers */,
+				C7B203E226F014710081012D /* Storyboards */,
+				C7B1E86126EE1BC500951F89 /* Components */,
+				C7B1E85D26EE19F100951F89 /* Utils */,
+				C7E1AD3D26EFDC5E00F1D5A0 /* Models */,
+				C7B203E326F016140081012D /* Extensions */,
+				C7B203E126F014600081012D /* Assets */,
 				C7B1E85626EDF78C00951F89 /* Info.plist */,
 			);
 			path = ClockClock;
@@ -92,16 +106,63 @@
 			isa = PBXGroup;
 			children = (
 				C7B1E86226EE1BCE00951F89 /* ClockView.swift */,
-				C7B1E86426EE29B500951F89 /* ClocksView.swift */,
+				C7B203D726F009DE0081012D /* ClocksView */,
 				C7B1E86626EE31EC00951F89 /* ClockClockView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		C7B203D726F009DE0081012D /* ClocksView */ = {
+			isa = PBXGroup;
+			children = (
+				C7B1E86426EE29B500951F89 /* ClocksView.swift */,
+				C7B203D826F009EC0081012D /* ClocksView+Angle.swift */,
+			);
+			path = ClocksView;
+			sourceTree = "<group>";
+		};
+		C7B203E026F0144A0081012D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C7B1E84C26EDF78B00951F89 /* ViewController.swift */,
+				C7B203DC26F00D320081012D /* SettingsViewController.swift */,
+				C7B203DE26F014200081012D /* ColorSelectionViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C7B203E126F014600081012D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C7B1E85126EDF78C00951F89 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		C7B203E226F014710081012D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				C7B1E85326EDF78C00951F89 /* LaunchScreen.storyboard */,
+				C7B1E84E26EDF78B00951F89 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		C7B203E326F016140081012D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C7B203E626F016370081012D /* UIStoryboard+Ext.swift */,
+				C7B203E826F016660081012D /* UINavigationController+Ext.swift */,
+				C7B203EA26F0187D0081012D /* UIColor+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C7E1AD3D26EFDC5E00F1D5A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				C716CBAA26EEAAB10002970E /* ClockViewComponents.swift */,
+				C7B203DA26F00A910081012D /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,12 +239,19 @@
 			files = (
 				C7B1E86726EE31EC00951F89 /* ClockClockView.swift in Sources */,
 				C716CBAB26EEAAB10002970E /* ClockViewComponents.swift in Sources */,
+				C7B203DD26F00D320081012D /* SettingsViewController.swift in Sources */,
 				C7B1E84D26EDF78B00951F89 /* ViewController.swift in Sources */,
 				C7B1E86326EE1BCE00951F89 /* ClockView.swift in Sources */,
+				C7B203DF26F014200081012D /* ColorSelectionViewController.swift in Sources */,
+				C7B203E726F016370081012D /* UIStoryboard+Ext.swift in Sources */,
+				C7B203DB26F00A910081012D /* Settings.swift in Sources */,
+				C7B203E926F016660081012D /* UINavigationController+Ext.swift in Sources */,
 				C7B1E84926EDF78B00951F89 /* AppDelegate.swift in Sources */,
 				C7B1E84B26EDF78B00951F89 /* SceneDelegate.swift in Sources */,
 				C7B1E85F26EE19FB00951F89 /* Math.swift in Sources */,
+				C7B203EB26F0187D0081012D /* UIColor+Ext.swift in Sources */,
 				C7B1E86526EE29B500951F89 /* ClocksView.swift in Sources */,
+				C7B203D926F009EC0081012D /* ClocksView+Angle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

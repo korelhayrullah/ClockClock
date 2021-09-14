@@ -34,13 +34,13 @@ class ClockView: UIView {
 		if #available(iOS 13, *) {
 			return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
 				if UITraitCollection.userInterfaceStyle == .dark {
-					return UIColor.white
-				} else {
-					return UIColor.black
+					return Settings.darkModeLineColor
 				}
+				
+				return Settings.lightModeLineColor
 			}
 		} else {
-			return .black
+			return Settings.lightModeLineColor
 		}
 	}
 	
@@ -135,16 +135,14 @@ class ClockView: UIView {
 		}
 	}
 	
-	var latestTheta: CGFloat?
-	var latestDuration: Double?
-	
+	func redraw() {
+		setNeedsDisplay()
+	}
+
 	func animate(index: Int, duration: Double, theta: CGFloat) {
 		guard 0 <= index && index < models.count else { return }
 		let model = models[index]
 		model.line.removeAllAnimations()
-		
-		latestTheta = theta
-		latestDuration = duration
 		
 		let anim = CABasicAnimation(keyPath: "transform.rotation.z")
 		anim.duration = duration

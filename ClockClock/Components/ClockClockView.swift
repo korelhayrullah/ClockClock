@@ -70,7 +70,15 @@ class ClockClockView: UIView {
 	}
 	
 	// MARK: - Methods
-	func update(_ date: Date = Date(), duration: Double = 2) {
+	func redraw() {
+		for i in 0..<2 {
+			for j in 0..<2 {
+				clocks[i][j].redraw()
+			}
+		}
+	}
+	
+	func update(_ date: Date = Date(), duration: Double) {
 		let comps = Calendar.current.dateComponents([.hour, .minute], from: Date())
 		
 		let hour = String(format: "%02d", comps.hour ?? 0)
