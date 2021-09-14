@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C716CBAB26EEAAB10002970E /* ClockViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716CBAA26EEAAB10002970E /* ClockViewComponents.swift */; };
 		C7A3BF8E26F0EEAC009510B4 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A3BF8D26F0EEAC009510B4 /* SettingsModel.swift */; };
+		C7A3BF9026F0F504009510B4 /* NumberPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A3BF8F26F0F504009510B4 /* NumberPickerView.swift */; };
 		C7B1E84926EDF78B00951F89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B1E84826EDF78B00951F89 /* AppDelegate.swift */; };
 		C7B1E84B26EDF78B00951F89 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B1E84A26EDF78B00951F89 /* SceneDelegate.swift */; };
 		C7B1E84D26EDF78B00951F89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B1E84C26EDF78B00951F89 /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		C716CBAA26EEAAB10002970E /* ClockViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewComponents.swift; sourceTree = "<group>"; };
 		C7A3BF8D26F0EEAC009510B4 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		C7A3BF8F26F0F504009510B4 /* NumberPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPickerView.swift; sourceTree = "<group>"; };
 		C7B1E84526EDF78B00951F89 /* ClockClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClockClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7B1E84826EDF78B00951F89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7B1E84A26EDF78B00951F89 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				C7B1E86226EE1BCE00951F89 /* ClockView.swift */,
 				C7B203D726F009DE0081012D /* ClocksView */,
 				C7B1E86626EE31EC00951F89 /* ClockClockView.swift */,
+				C7A3BF8F26F0F504009510B4 /* NumberPickerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				C7B1E84D26EDF78B00951F89 /* ViewController.swift in Sources */,
 				C7B1E86326EE1BCE00951F89 /* ClockView.swift in Sources */,
 				C7B203DF26F014200081012D /* ColorSelectionViewController.swift in Sources */,
+				C7A3BF9026F0F504009510B4 /* NumberPickerView.swift in Sources */,
 				C7B203E726F016370081012D /* UIStoryboard+Ext.swift in Sources */,
 				C7B203DB26F00A910081012D /* Settings.swift in Sources */,
 				C7B203E926F016660081012D /* UINavigationController+Ext.swift in Sources */,

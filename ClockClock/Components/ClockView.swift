@@ -9,7 +9,7 @@ import UIKit
 
 class ClockView: UIView {
 	// MARK: - Properties
-	private let overlay: CAShapeLayer = CAShapeLayer()
+	private let outline: CAShapeLayer = CAShapeLayer()
 	
 	private let models: [ClockViewComponents] = {
 		return [
@@ -18,28 +18,30 @@ class ClockView: UIView {
 		]
 	}()
 	
-	var overlayWidth: CGFloat = 1 {
-		didSet {
-			setNeedsDisplay()
+	var outlineWidth: CGFloat {
+		return Settings.current.outlineWidth
+	}
+	
+	var outlineColor: UIColor {
+		return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
+			if UITraitCollection.userInterfaceStyle == .dark {
+				return Settings.current.darkModeOutlineColor
+			}
+			
+			return Settings.current.lightModeOutlineColor
 		}
 	}
 	
-	var lineWidth: CGFloat = 2 {
-		didSet {
-			setNeedsDisplay()
-		}
+	var lineWidth: CGFloat {
+		return Settings.current.lineWidth
 	}
 	
 	var lineColor: UIColor {
-		if #available(iOS 13, *) {
-			return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
-				if UITraitCollection.userInterfaceStyle == .dark {
-					return Settings.current.darkModeLineColor
-				}
-				
-				return Settings.current.lightModeLineColor
+		return UIColor { (UITraitCollection: UITraitCollection) -> UIColor in
+			if UITraitCollection.userInterfaceStyle == .dark {
+				return Settings.current.darkModeLineColor
 			}
-		} else {
+			
 			return Settings.current.lightModeLineColor
 		}
 	}
@@ -125,13 +127,13 @@ class ClockView: UIView {
 			clockwise: true
 		)
 		
-		overlay.lineWidth = overlayWidth
-		overlay.strokeColor = UIColor.gray.cgColor
-		overlay.fillColor = UIColor.clear.cgColor
-		overlay.path = path.cgPath
+		outline.lineWidth = outlineWidth
+		outline.strokeColor = outlineColor.cgColor
+		outline.fillColor = UIColor.clear.cgColor
+		outline.path = path.cgPath
 		
-		if overlay.superlayer == nil {
-			layer.addSublayer(overlay)
+		if outline.superlayer == nil {
+			layer.addSublayer(outline)
 		}
 	}
 	
